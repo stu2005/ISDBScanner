@@ -92,7 +92,9 @@ def main(
     ## 衛星放送では同一ネットワーク内の異なるチャンネルの情報を一括で取得できるため、スキャンは 3 回のみで済む
     ## BS のデフォルト TS は運用規定で 0x40F1 (NHKBS1: BS15/TS0) だが、手元環境ではなぜか他 TS と比べ NIT の送出間隔が不安定 (?) で
     ## 20 秒程度録画しないと NIT を確実に取得できないため、ここでは BS01/TS0 (BS朝日) をスキャンする
-    scan_terrestrial_physical_channels = [TransportStreamInfo(physical_channel=f'T{i}') for i in range(13, 63), TransportStreamInfo(physical_channel=f'C{i}') for i in range(13, 63)]
+    scan_terrestrial_physical_channels = [
+        TransportStreamInfo(physical_channel=f'{prefix}{i}') for prefix in ('T', 'C') for i in range(13, 63)
+    ]
     scan_satellite_physical_channels = [
         TransportStreamInfo(physical_channel='BS01/TS0'),
     ]
