@@ -67,7 +67,7 @@ jobs:
       - name: Create Dockerfile
         run: |
           cat <<EOF > Dockerfile
-          FROM library/ubuntu:20.04
+          FROM --platform=linux/arm64/v8 library/ubuntu:20.04
           ENV DEBIAN_FRONTEND=noninteractive
           RUN apt-get update && \
               apt-get install -y --no-install-recommends software-properties-common && \
